@@ -6,8 +6,8 @@ console.log("ESERCIZIO 1");
 function concatenare(stringa1, stringa2) {
   const primaparte = stringa1.slice(0, 2);
   const secondaparte = stringa2.slice(-3);
-  result = primaparte.concat(secondaparte);
-  result = result.toUpperCase();
+  result = primaparte.concat(secondaparte).toUpperCase();
+
   console.log(result);
 }
 concatenare("casa", "pera");
@@ -19,7 +19,7 @@ concatenare("casa", "pera");
 //creo un ciclo di 10 indici
 //creao un operazione che mi randommizzi questi 10 indici con numeri compresi da 0 a 100
 console.log("ESERCIZIO 2");
-function generatoreArray(...array) {
+function generatoreArray(array) {
   randomArray = [];
 
   for (let i = 0; i < 10; i++) {
@@ -58,19 +58,21 @@ console.log(somma(numArray));
 */
 console.log("ESERCIZIO 5");
 const abc = [23, 50, 7];
-const addizione = abc.reduce((sum, item) => sum + item);
+const addizione = abc.reduce((sum, item) => sum + item, 0);
 console.log(addizione);
+
 /* ESERCIZIO 6 (map)
   Scrivi una funzione che, dato un array di soli numeri e un numero n come parametri,
    ritorni un secondo array con tutti i valori del precedente incrementati di n
 */
 console.log("ESERCIZIO 6");
 
-const sommaDiArray = function (array, i) {
-  let somdArray = array.map((number) => number + i);
+const sommaDiArray = function (array, n) {
+  let somdArray = array.map((number) => number + n);
   return somdArray;
 };
 console.log(sommaDiArray(numArray, 1));
+
 /* ESERCIZIO 7 (map)
   Scrivi una funzione che, dato un array di stringhe, 
   ritorni un nuovo array contenente le lunghezze delle rispettive stringhe dell'array di partenza
@@ -79,9 +81,10 @@ console.log(sommaDiArray(numArray, 1));
 
 const strArray = ["EPICODE", "IS", "GREAT!"];
 
-const countStrings = function (array) {
-  const countedStrings = array.map((string) => {
-    return string.length;
+const countStrings = (array) => {
+  const countedStrings = array.map((elementoArray) => {
+    // con map creo una nuova variabile
+    return elementoArray.length;
   });
   return countedStrings;
 };
@@ -93,7 +96,7 @@ console.log(countStrings(strArray));
 */
 console.log("ESERCIZIO 8");
 
-const dispari = function () {
+const dispari = () => {
   const numeri1 = [];
   const numeri2 = [];
   for (let i = 1; i < 100; i++) {
@@ -224,6 +227,7 @@ const movies = [
 /* ESERCIZIO 9 (forEach)
   Scrivi una funzione per trovare il film più vecchio nell'array fornito.
 */ console.log("ESERCIZIO 9");
+
 function findOldestMovie(movies) {
   let oldestMovie = movies[0]; // Assume che il primo film sia il più vecchio
 
@@ -248,38 +252,33 @@ console.log(
 /* ESERCIZIO 10
   Scrivi una funzione per ottenere il numero di film contenuti nell'array fornito.
 */ console.log("ESERCIZIO 10");
-function getNumberOfMovies(movies) {
+const getNumberOfMovies = (movies) => {
   return movies.length;
-}
+};
 
-const numberOfMovies = getNumberOfMovies(movies);
-console.log("Il numero di film è:", numberOfMovies);
+console.log("Il numero di film è:", getNumberOfMovies(movies));
+
 /* ESERCIZIO 11 (map)
   Scrivi una funzione per creare un array con solamente i titoli dei film contenuti nell'array fornito.
 */ console.log("ESERCIZIO 11");
-function getMovieTitles(movies) {
-  const titles = [];
-  movies.forEach((movie) => {
-    titles.push(movie.Title);
+const getMovieTitles = (movies) => {
+  const arrayTitoli = [];
+  movies.map((movie) => {
+    arrayTitoli.push(movie.Title);
   });
-  return titles;
-}
+  return arrayTitoli;
+};
 
-const movieTitles = getMovieTitles(movies);
-console.log("Titoli dei film:", movieTitles);
+console.log("Titoli dei film:", getMovieTitles(movies));
+
 /* ESERCIZIO 12 (filter)
   Scrivi una funzione per ottenere dall'array fornito solamente i film usciti nel millennio corrente.
 */ console.log("ESERCIZIO 12");
-function getMoviesThisMillennium(movies) {
-  const currentYear = new Date().getFullYear();
-  const millenniumMovies = movies.filter((movie) => {
-    return parseInt(movie.Year) >= 2000 && parseInt(movie.Year) < currentYear;
-  });
-  return millenniumMovies;
-}
-
-const millenniumMovies = getMoviesThisMillennium(movies);
-console.log("Film usciti nel millennio corrente:", millenniumMovies);
+const filmCorrenti = (film) => {
+  const millennio = movies.filter((film) => film.Year >= 2000);
+  return millennio;
+};
+console.log(filmCorrenti(movies));
 /* ESERCIZIO 13 (reduce)
   Scrivi una funzione per calcolare la somma di tutti gli anni in cui sono stati prodotti i film contenuti nell'array fornito.
 */ console.log("ESERCIZIO 13");
@@ -292,35 +291,30 @@ function sumOfProductionYears(movies) {
 
 const totalYears = sumOfProductionYears(movies);
 console.log("Somma degli anni di produzione dei film:", totalYears);
+
 /* ESERCIZIO 14 (find)
   Scrivi una funzione per ottenere dall'array fornito uno specifico film (la funzione riceve un imdbID come parametro).
 */ console.log("ESERCIZIO 14");
-function findOldestMovie(movies) {
-  // Utilizziamo la funzione `find` sull'array `movies`
-  const filmAntico = movies.find((movie) => {
-    // Restituiamo true se il film ha l'anno minimo
-    return movie.Year === "1963";
-  });
 
-  // Restituiamo il film più vecchio trovato
-  return filmAntico;
-}
-
-// Test della funzione
-const filmAntico = findOldestMovie(movies);
-console.log("Film più vecchio:", filmAntico);
+const findimbdID = (stringa) => {
+  const filimbId = movies.find((movie) => movie.imdbID === stringa);
+  return filimbId;
+};
+console.log(findimbdID("tt4154756"));
 
 /* ESERCIZIO 15 (findIndex)
   Scrivi una funzione per ottenere dall'array fornito l'indice del primo film uscito nell'anno fornito come parametro.
 */
-function findFirstMovieIndexByYear(movies, year) {
-  const index = movies.findIndex((movie) => {
-    return movie.Year === year;
-  });
+const findFirstMovieIndexByYear = (movies, year) => {
+  const primoFilm = movies.findIndex((movie) => movie.Year === year);
 
-  return index;
-}
+  return primoFilm;
+};
 
 const year = "2012";
-const firstMovieIndex = findFirstMovieIndexByYear(movies, year);
-console.log("Indice del primo film uscito nel", year + ":", firstMovieIndex);
+
+console.log(
+  "Indice del primo film uscito nel",
+  year + ":",
+  findFirstMovieIndexByYear(movies, year)
+);
