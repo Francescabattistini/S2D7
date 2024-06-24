@@ -93,17 +93,17 @@ console.log(countStrings(strArray));
 */
 console.log("ESERCIZIO 8");
 
-const getAllOdds = function () {
-  const from1To99 = [];
-  const odds = [];
+const dispari = function () {
+  const numeri1 = [];
+  const numeri2 = [];
   for (let i = 1; i < 100; i++) {
-    from1To99.push(i);
+    numeri1.push(i);
   }
-  from1To99.filter((number) => number % 2 !== 0).forEach((n) => odds.push(n));
-  return odds;
+  numeri1.filter((number) => number % 2 !== 0).forEach((n) => numeri2.push(n));
+  return numeri2;
 };
 
-console.log(getAllOdds());
+console.log(dispari());
 /* Questo array di film verrà usato negli esercizi a seguire. Non modificarlo e scorri oltre per riprendere gli esercizi :) */
 const movies = [
   {
